@@ -5,6 +5,7 @@ date: 2025-11-29 10:00:00 +0900
 categories: [Guide, Getting Started]
 tags: [welcome, tutorial, academic publishing]
 pin: true
+author: Scholarsnote
 ---
 
 ## Welcome to ScholarsNote
