@@ -43,7 +43,7 @@ As shown in \nameref{sec:results}, our findings...
     \label{#1}%
     \endgroup
 }
-\makeatother
+\makeatother 
 ```
 
 ### ধাপ ২: Unnumbered Sections-এ ব্যবহার করুন
