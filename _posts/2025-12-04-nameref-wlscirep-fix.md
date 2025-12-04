@@ -17,6 +17,7 @@ Scientific Reports জার্নালের `wlscirep` ক্লাসে স
 
 উদাহরণস্বরূপ, আপনি যদি লেখেন:
 
+{% raw %}
 ```latex
 \section*{Results}
 \label{sec:results}
@@ -24,6 +25,7 @@ Scientific Reports জার্নালের `wlscirep` ক্লাসে স
 % অন্যত্র রেফারেন্স করলে
 As shown in \nameref{sec:results}, our findings...
 ```
+{% endraw %}
 
 এটি আউটপুট দেবে: "As shown in , our findings..." — অর্থাৎ সেকশনের নাম "Results" দেখাবে না।
 
@@ -35,6 +37,7 @@ As shown in \nameref{sec:results}, our findings...
 
 `\documentclass{wlscirep}` এর পরে নিচের কোডটি যোগ করুন:
 
+{% raw %}
 ```latex
 \makeatletter
 \newcommand{\namedlabel}[2]{%
@@ -45,34 +48,42 @@ As shown in \nameref{sec:results}, our findings...
 }
 \makeatother 
 ```
+{% endraw %}
 
 ### ধাপ ২: Unnumbered Sections-এ ব্যবহার করুন
 
 সাধারণ পদ্ধতির বদলে:
 
+{% raw %}
 ```latex
 \section*{Results}
 \label{sec:results}  % এটি nameref-এ কাজ করবে না
 ```
+{% endraw %}
 
 এভাবে লিখুন:
 
+{% raw %}
 ```latex
 \section*{Results}
 \namedlabel{sec:results}{Results}
 \addcontentsline{toc}{section}{Results}  % ঐচ্ছিক: Table of Contents-এ যোগ করে
 ```
+{% endraw %}
 
 ### ধাপ ৩: সেকশন রেফারেন্স করুন
 
+{% raw %}
 ```latex
 As shown in \nameref{sec:results}, our findings indicate...
 ```
+{% endraw %}
 
 এবার সঠিক আউটপুট পাবেন: "As shown in Results, our findings indicate..."
 
 ## সম্পূর্ণ উদাহরণ
 
+{% raw %}
 ```latex
 \documentclass[fleqn,10pt]{wlscirep}
 
@@ -120,6 +131,7 @@ the hypothesis discussed in \nameref{sec:introduction}.
 
 \end{document}
 ```
+{% endraw %}
 
 ## গুরুত্বপূর্ণ টিপস
 
@@ -147,6 +159,7 @@ pdflatex yourfile.tex
 
 ## দ্রুত রেফারেন্স
 
+{% raw %}
 ```latex
 % Preamble-এ একবার (বাধ্যতামূলক)
 \makeatletter
@@ -165,6 +178,7 @@ pdflatex yourfile.tex
 % রেফারেন্স করতে
 \nameref{sec:label}
 ```
+{% endraw %}
 
 ## পরীক্ষিত সংস্করণ
 
