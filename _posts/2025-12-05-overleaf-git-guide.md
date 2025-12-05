@@ -1,17 +1,10 @@
 ---
-title: "Overleaf-এ Git ব্যবহারের সম্পূর্ণ গাইড (Troubleshooting সহ)"
-description: "Overleaf প্রজেক্টে Git ব্যবহার, কনফ্লিক্ট সমাধান এবং সাধারণ সমস্যার সমাধানের সম্পূর্ণ নির্দেশিকা।"
-author: "Prof. Md Abdus Samad"
+title: Overleaf-এ Git ব্যবহারের সম্পূর্ণ গাইড (Troubleshooting সহ)
+description: Overleaf প্রজেক্টে Git ব্যবহার, কনফ্লিক্ট সমাধান এবং সাধারণ সমস্যার সমাধানের সম্পূর্ণ নির্দেশিকা।
 date: 2025-12-05 10:00:00 +0900
-categories: [Tutorial, LaTeX, Git, Overleaf]
+categories: [Tutorial, LaTeX]
 tags: [overleaf, git, version control, latex, bengali, tutorial]
-image: ""
-format:
-  html:
-    toc: true
-    toc-depth: 3
-    code-fold: false
-    code-tools: true
+pin: false
 ---
 
 Overleaf LaTeX ডকুমেন্ট তৈরির একটি জনপ্রিয় প্ল্যাটফর্ম। কিন্তু অনেকেই জানেন না যে, Overleaf প্রজেক্টে Git version control ব্যবহার করা যায়। এর মাধ্যমে আপনি local কম্পিউটারে কাজ করতে পারবেন, backup রাখতে পারবেন এবং advanced version control সুবিধা পাবেন। 
@@ -31,7 +24,7 @@ Overleaf প্রজেক্ট থেকে Git URL পেতে:
 
 ### প্রথমবার Clone করা
 
-```{.bash}
+```bash
 git clone https://git.overleaf.com/your-project-id
 cd your-project-folder
 ```
@@ -42,7 +35,7 @@ cd your-project-folder
 
 প্রথমবার ব্যবহারের আগে আপনার নাম ও ইমেইল সেট করুন:
 
-```{.bash}
+```bash
 git config --global user.name "Your Name"
 git config --global user.email "your.email@example.com"
 ```
@@ -53,7 +46,7 @@ git config --global user.email "your.email@example.com"
 
 Overleaf-এ Git ব্যবহারের সবচেয়ে নিরাপদ ওয়ার্কফ্লো:
 
-```{.bash}
+```bash
 # ১. প্রথমে সর্বশেষ পরিবর্তন Pull করুন
 git pull origin master
 
@@ -76,7 +69,7 @@ git push origin master
 
 **Push করার আগে সবসময় Pull করুন:**
 
-```{.bash}
+```bash
 git pull origin master
 # এরপর push করুন
 git push origin master
@@ -84,7 +77,7 @@ git push origin master
 
 **অথবা rebase ব্যবহার করুন (আরও পরিষ্কার history):**
 
-```{.bash}
+```bash
 git pull --rebase origin master
 git push origin master
 ```
@@ -93,7 +86,7 @@ git push origin master
 
 ### স্ট্যাটাস ও লগ দেখা
 
-```{.bash}
+```bash
 # বর্তমান অবস্থা দেখুন
 git status
 
@@ -109,7 +102,7 @@ git log
 
 ### Branch ম্যানেজমেন্ট
 
-```{.bash}
+```bash
 # বর্তমান branch দেখুন
 git branch
 
@@ -122,7 +115,7 @@ git branch -f master <commit-hash>
 
 ### ফাইল স্টেজিং ও আনস্টেজিং
 
-```{.bash}
+```bash
 # একটি ফাইল stage করুন
 git add filename.tex
 
@@ -140,7 +133,7 @@ git restore filename.tex
 
 LaTeX compilation-এ তৈরি অপ্রয়োজনীয় ফাইলগুলো Git-এ রাখার দরকার নেই:
 
-```{.bash}
+```bash
 # সব build files unstage করুন
 git restore --staged "*.aux" "*.bbl" "*.blg" "*.log" "*.out" "*.synctex.gz" "*.pdf" "*.spl"
 
@@ -148,10 +141,9 @@ git restore --staged "*.aux" "*.bbl" "*.blg" "*.log" "*.out" "*.synctex.gz" "*.p
 git restore "*.aux" "*.bbl" "*.blg" "*.log" "*.out" "*.synctex.gz" "*.pdf" "*.spl"
 ```
 
-::: {.callout-tip}
-## Better approach: `.gitignore` ফাইল তৈরি করুন
+**Better approach: `.gitignore` ফাইল তৈরি করুন**
 
-```{.bash}
+```bash
 # .gitignore ফাইল তৈরি করুন
 echo "*.aux
 *.bbl
@@ -170,11 +162,10 @@ git add .gitignore
 git commit -m "Add .gitignore for LaTeX build files"
 git push origin master
 ```
-:::
 
 ### Push ও Pull
 
-```{.bash}
+```bash
 # Remote থেকে পরিবর্তন আনুন
 git pull origin master
 
@@ -192,15 +183,13 @@ git push --force-with-lease origin master
 
 ### সমস্যা ১: Detached HEAD অবস্থা
 
-::: {.callout-warning}
 **লক্ষণ:** `git status` কমান্ড দিলে দেখায়: `HEAD detached at <commit>`
 
 **কারণ:** আপনি কোনো নির্দিষ্ট commit-এ আছেন, কোনো branch-এ নেই।
-:::
 
 **সমাধান:**
 
-```{.bash}
+```bash
 # ১. বর্তমান অবস্থা দেখুন
 git log --oneline -1
 
@@ -216,13 +205,11 @@ git branch -d temp-branch  # temp branch মুছে ফেলুন
 
 ### সমস্যা ২: Merge Conflict
 
-::: {.callout-warning}
 **লক্ষণ:** Pull করার সময় বলে: `CONFLICT (content): Merge conflict in file.tex`
-:::
 
 **সমাধান:**
 
-```{.bash}
+```bash
 # ১. Conflict-যুক্ত ফাইলগুলো দেখুন
 git status
 
@@ -243,13 +230,11 @@ git push origin master
 
 ### সমস্যা ৩: Rebase Conflict
 
-::: {.callout-warning}
 **লক্ষণ:** `git pull --rebase` করার পর conflict এবং বলে: `Resolve all conflicts manually`
-:::
 
 **সমাধান:**
 
-```{.bash}
+```bash
 # ১. Conflict-যুক্ত ফাইল edit করুন
 
 # ২. Resolved ফাইল stage করুন
@@ -264,15 +249,13 @@ git rebase --abort
 
 ### সমস্যা ৪: Push Rejected
 
-::: {.callout-warning}
 **লক্ষণ:** Push করতে গেলে error: `Updates were rejected because the remote contains work...`
 
 **কারণ:** Remote-এ নতুন commit আছে যা আপনার local-এ নেই।
-:::
 
 **সমাধান:**
 
-```{.bash}
+```bash
 # ১. প্রথমে pull করুন
 git pull --rebase origin master
 
@@ -287,7 +270,7 @@ git push origin master
 
 **সমাধান (শেষ commit থেকে ফাইল সরান):**
 
-```{.bash}
+```bash
 # ১. Commit থেকে ফাইল সরান কিন্তু working directory-তে রাখুন
 git reset HEAD~1 --soft
 
@@ -301,24 +284,21 @@ git commit -m "Correct commit"
 
 ### সমস্যা ৬: Want to Discard All Local Changes
 
-::: {.callout-caution}
-## সতর্কতা
-এটি আপনার সব local পরিবর্তন মুছে দেবে!
-:::
-
 **সমাধান:**
 
-```{.bash}
+```bash
 # সব local পরিবর্তন বাতিল করে remote-এর version নিন
 git fetch origin
 git reset --hard origin/master
+
+# সতর্কতা: এটি আপনার সব local পরিবর্তন মুছে দেবে!
 ```
 
 ### সমস্যা ৭: Overleaf-এ Push হচ্ছে না
 
 **সমাধান:**
 
-```{.bash}
+```bash
 # ১. Authentication check করুন - Overleaf login করতে বলবে
 git push origin master
 
@@ -338,7 +318,7 @@ Interactive rebase দিয়ে আপনি commit history পরিষ্�
 
 ### Commit Edit করা
 
-```{.bash}
+```bash
 # শেষ 5টি commit নিয়ে কাজ করতে চাইলে
 git rebase -i HEAD~5
 
@@ -358,13 +338,13 @@ git rebase --continue
 
 যদি কোনো commit skip করতে চান:
 
-```{.bash}
+```bash
 git rebase --skip
 ```
 
 ## Best Practices
 
-### করণীয় {.unnumbered}
+### করণীয়
 
 1. **কাজ শুরুর আগে সবসময় pull করুন**
 2. **Small, logical commits করুন** - একসাথে অনেক পরিবর্তন না করে ছোট ছোট ভাগে commit করুন
@@ -372,7 +352,7 @@ git rebase --skip
 4. **.gitignore ব্যবহার করুন** - Build files track করবেন না
 5. **Regular backup রাখুন** - Git দিয়ে আপনার কাজ সুরক্ষিত থাকবে
 
-### বর্জনীয় {.unnumbered}
+### বর্জনীয়
 
 1. **Push করার আগে pull না করা** - এতে conflict হওয়ার সম্ভাবনা বাড়ে
 2. **Build files commit করা** - এগুলো প্রতিবার তৈরি হয় এবং repository বড় করে
@@ -384,7 +364,7 @@ git rebase --skip
 
 ### দৈনন্দিন কাজের Commands
 
-```{.bash}
+```bash
 git pull origin master          # Remote থেকে latest changes আনুন
 git status                      # বর্তমান অবস্থা দেখুন
 git add .                       # সব পরিবর্তন stage করুন
@@ -394,7 +374,7 @@ git push origin master          # Push করুন
 
 ### Status ও History
 
-```{.bash}
+```bash
 git status                      # Current status
 git log --oneline -1           # সর্বশেষ commit
 git log --oneline --graph      # Commit history graph
@@ -404,7 +384,7 @@ git diff --staged              # Staged changes দেখুন
 
 ### Undo ও Reset
 
-```{.bash}
+```bash
 git restore filename           # Working directory change বাতিল করুন
 git restore --staged filename  # Unstage করুন
 git reset HEAD~1 --soft        # শেষ commit undo করুন (changes রাখুন)
@@ -414,7 +394,7 @@ git reset --hard origin/master # Local সব পরিবর্তন বাত
 
 ### Branch
 
-```{.bash}
+```bash
 git branch                     # সব branch দেখুন
 git checkout master            # Master branch-এ যান
 git checkout -b new-branch     # নতুন branch তৈরি করুন
@@ -423,7 +403,7 @@ git branch -d branch-name      # Branch মুছুন
 
 ### Conflict Resolution
 
-```{.bash}
+```bash
 git status                     # Conflict-যুক্ত ফাইল দেখুন
 git add resolved-file          # Resolved ফাইল stage করুন
 git rebase --continue          # Rebase চালিয়ে যান
@@ -436,11 +416,8 @@ git rebase --abort             # Rebase বাতিল করুন
 
 যদি আপনি অফিস ও বাড়িতে আলাদা computer ব্যবহার করেন:
 
-::: {.panel-tabset}
-
-## Computer A (অফিসে)
-
-```{.bash}
+**Computer A-তে (অফিসে):**
+```bash
 git pull origin master         # প্রথমে pull
 # কাজ করুন
 git add .
@@ -448,17 +425,14 @@ git commit -m "Work from office"
 git push origin master         # Push করুন
 ```
 
-## Computer B (বাড়িতে)
-
-```{.bash}
+**Computer B-তে (বাড়িতে):**
+```bash
 git pull origin master         # অফিসের কাজ আনুন
 # কাজ করুন
 git add .
 git commit -m "Work from home"
 git push origin master         # Push করুন
 ```
-
-:::
 
 ### Collaboration: একাধিক Author
 
@@ -490,12 +464,8 @@ git push origin master         # Push করুন
 
 ---
 
-::: {.callout-tip}
-## মনে রাখুন
-Git শেখা প্রথমদিকে কঠিন মনে হতে পারে, কিন্তু একবার ওয়ার্কফ্লো বুঝে গেলে এটি আপনার গবেষণা কাজের অমূল্য সহায়ক হয়ে উঠবে। Regular practice করুন এবং প্রথমে simple commands দিয়ে শুরু করুন!
-:::
+> Git শেখা প্রথমদিকে কঠিন মনে হতে পারে, কিন্তু একবার ওয়ার্কফ্লো বুঝে গেলে এটি আপনার গবেষণা কাজের অমূল্য সহায়ক হয়ে উঠবে। Regular practice করুন এবং প্রথমে simple commands দিয়ে শুরু করুন!
+{: .prompt-tip }
 
-::: {.callout-warning}
-## সবচেয়ে গুরুত্বপূর্ণ নিয়ম
-**Push করার আগে সবসময় Pull করুন!**
-:::
+> **মনে রাখবেন:** Push করার আগে সবসময় Pull করুন - এটিই সবচেয়ে গুরুত্বপূর্ণ নিয়ম!
+{: .prompt-warning }
